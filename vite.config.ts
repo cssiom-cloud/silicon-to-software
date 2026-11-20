@@ -12,5 +12,5 @@ export default defineConfig({
    * - หาก Deploy ไปที่ Custom Domain หรือ Root (https://<username>.github.io/)
    *   หรือทดสอบแบบ Relative Path ให้ใช้ './'
    */
-  base: './',
+  base: '/silicon-to-software/',
 })
