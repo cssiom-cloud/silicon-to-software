@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "IBM Plex Sans Thai", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-obsidian: #09090B;
+  --color-carbon: #111116;
+  --color-wire: #27272A;
+  --color-cyan-signal: #06B6D4;
+  --color-purple-field: #A855F7;
+  --color-slate-low: #52525B;
+}
+
+:root {
+  color-scheme: light;
+  --bg-page: #FAFAFB;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F4F4F6;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-subtle: #E4E4E7;
+  --border-strong: #D4D4D8;
+  --text-primary: #09090B;
+  --text-secondary: #52525B;
+  --text-muted: #71717A;
+
+  --signal-high: #0891B2;
+  --signal-high-bright: #06B6D4;
+  --signal-field: #9333EA;
+  --signal-field-bright: #A855F7;
+  --signal-low: #71717A;
+  --signal-warn: #D97706;
+  --signal-danger: #DC2626;
+  --signal-success: #059669;
+
+  --svg-canvas: #F8FAFC;
+  --svg-node: #FFFFFF;
+  --svg-substrate: #E2E8F0;
+  --svg-oxide: #EDE9FE;
+  --svg-wire-off: #CBD5E1;
+  --svg-text: #0F172A;
+  --svg-text-muted: #475569;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg-page: #09090B;
+  --bg-surface: #111116;
+  --bg-elevated: #18181F;
+  --bg-glass: rgba(17, 17, 22, 0.78);
+  --border-subtle: #27272A;
+  --border-strong: #3F3F46;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+
+  --signal-high: #06B6D4;
+  --signal-high-bright: #22D3EE;
+  --signal-field: #A855F7;
+  --signal-field-bright: #C084FC;
+  --signal-low: #52525B;
+  --signal-warn: #F59E0B;
+  --signal-danger: #EF4444;
+  --signal-success: #10B981;
+
+  --svg-canvas: #0B0B10;
+  --svg-node: #15151D;
+  --svg-substrate: #1A1A26;
+  --svg-oxide: #241938;
+  --svg-wire-off: #30303B;
+  --svg-text: #F4F4F5;
+  --svg-text-muted: #94A3B8;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -12px rgba(0, 0, 0, 0.22);
+}
+
+.dark .glass-panel {
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 20px 48px -20px rgba(0, 0, 0, 0.7);
+}
+
+.simulator-stage {
+  background: var(--svg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Custom Range Slider */
+input[type="range"].tech-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--border-strong);
+  outline: none;
+}
+
+input[type="range"].tech-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--signal-field-bright);
+  border: 3px solid var(--bg-surface);
+  box-shadow: 0 0 0 2px var(--signal-field), 0 4px 12px rgba(168, 85, 247, 0.45);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"].tech-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+input[type="range"].tech-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--signal-field-bright);
+  border: 3px solid var(--bg-surface);
+  box-shadow: 0 0 0 2px var(--signal-field), 0 4px 12px rgba(168, 85, 247, 0.45);
+  cursor: pointer;
+}
+
+/* SVG Signal Flow Animations */
+@keyframes dashFlow {
+  from {
+    stroke-dashoffset: 32;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dashFlowReverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 32;
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes tunnelDrop {
+  0% {
+    transform: translateY(42px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-28px);
+    opacity: 0;
+  }
+}
+
+@keyframes tunnelEject {
+  0% {
+    transform: translateY(-28px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(42px);
+    opacity: 0;
+  }
+}
+
+.animate-flow {
+  stroke-dasharray: 6 10;
+  animation: dashFlow 0.85s linear infinite;
+}
+
+.animate-flow-slow {
+  stroke-dasharray: 6 10;
+  animation: dashFlow 1.5s linear infinite;
+}
+
+.animate-flow-reverse {
+  stroke-dasharray: 6 10;
+  animation: dashFlowReverse 0.85s linear infinite;
+}
+
+.animate-field-pulse {
+  animation: pulseSoft 1.8s ease-in-out infinite;
+}
+
+.animate-tunnel-in {
+  animation: tunnelDrop 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.animate-tunnel-out {
+  animation: tunnelEject 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Custom Subtle Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
