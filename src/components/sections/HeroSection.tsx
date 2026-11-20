@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, ArrowRight, BookOpen, Layers } from 'lucide-react'
+import { ArrowDown, ArrowRight, BookOpen, Box, Layers } from 'lucide-react'
 import { LAYER_NAV_ITEMS } from '../../data/layers'
 
 interface HeroSectionProps {
@@ -11,7 +11,7 @@ export function HeroSection({ onNavigate, onOpenGlossary }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      className="relative overflow-hidden py-10 sm:py-18 lg:py-22"
     >
       {/* Subtle architectural radial glow — clean, restrained, no cliché grid */}
       <div
@@ -24,21 +24,21 @@ export function HeroSection({ onNavigate, onOpenGlossary }: HeroSectionProps) {
       />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-10">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-10">
           {/* Left Editorial Thesis */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="lg:col-span-6 space-y-6"
+            className="lg:col-span-6 space-y-5 sm:space-y-6"
           >
             <div className="font-mono-tech text-xs font-semibold uppercase tracking-[0.18em] text-[var(--signal-high)]">
-              FIRST-PRINCIPLES INTERACTIVE TEXTBOOK
+              FIRST-PRINCIPLES INTERACTIVE 3D TEXTBOOK
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.18]">
               จากทรายซิลิคอนสู่โค้ดโปรแกรม:
-              <span className="block mt-2 text-[var(--text-secondary)] font-semibold text-2xl sm:text-3xl lg:text-[2rem]">
+              <span className="block mt-2 text-[var(--text-secondary)] font-semibold text-xl sm:text-3xl lg:text-[2rem]">
                 กลไกการทำงานของไมโครชิปและหน่วยความจำ
               </span>
             </h1>
@@ -52,29 +52,39 @@ export function HeroSection({ onNavigate, onOpenGlossary }: HeroSectionProps) {
               บทเรียนเชิงโต้ตอบนี้จะแกะทุก <strong className="text-[var(--text-primary)]">“กล่องดำ”</strong>{' '}
               ออกทีละชั้น ตั้งแต่ฟิสิกส์ของอะตอมซิลิคอน (<span className="font-mono-tech">Layer 0</span>)
               ไปจนถึงวงจร CPU และหน่วยความจำ SRAM, DRAM, NAND Flash (<span className="font-mono-tech">Layer 5</span>)
-              โดยทุกชั้นมี <strong className="text-[var(--text-primary)]">Interactive Simulator</strong> ให้คุณกดทดลองด้วยตัวเอง
+              พร้อม <strong className="text-[var(--text-primary)]">3D Studio ที่หมุน 360° และปรับแต่งได้จริง</strong> ทั้งบนมือถือและคอมพิวเตอร์
             </p>
 
             {/* Primary Actions */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
+              <button
+                id="hero-3d-btn"
+                type="button"
+                onClick={() => onNavigate('lab-3d')}
+                className="inline-flex items-center gap-2 rounded-xl bg-[var(--signal-high)] px-5 py-3 text-sm font-bold text-zinc-950 transition hover:brightness-110 active:scale-[0.98] cursor-pointer"
+              >
+                <Box className="h-4 w-4" />
+                <span>เปิดห้องทดลอง 3D (หมุนได้)</span>
+              </button>
+
               <button
                 id="hero-start-btn"
                 type="button"
                 onClick={() => onNavigate('layer-0')}
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--signal-high)] px-5 py-3 text-sm font-bold text-zinc-950 transition hover:brightness-110 active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface)] px-4 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--signal-high)] cursor-pointer"
               >
-                <span>เริ่มสำรวจจาก Layer 0</span>
-                <ArrowDown className="h-4 w-4" />
+                <span>เริ่มเรียน Layer 0</span>
+                <ArrowDown className="h-4 w-4 text-[var(--signal-high)]" />
               </button>
 
               <button
                 id="hero-summary-btn"
                 type="button"
                 onClick={() => onNavigate('layer-5')}
-                className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface)] px-4 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--signal-high)] cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-subtle)] bg-transparent px-3.5 py-3 text-xs font-medium text-[var(--text-secondary)] transition hover:border-[var(--signal-high)] hover:text-[var(--text-primary)] cursor-pointer"
               >
                 <Layers className="h-4 w-4 text-[var(--signal-high)]" />
-                <span>ข้ามไปดูตารางสรุปรวม</span>
+                <span>ตารางสรุปรวม</span>
               </button>
 
               <button

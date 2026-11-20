@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Navbar } from './components/layout/Navbar'
 import { NavigationDrawer } from './components/layout/NavigationDrawer'
 import { HeroSection } from './components/sections/HeroSection'
+import { Lab3DSection } from './components/sections/Lab3DSection'
 import { Layer0Section } from './components/sections/Layer0Section'
 import { Layer1Section } from './components/sections/Layer1Section'
 import { Layer2Section } from './components/sections/Layer2Section'
@@ -12,7 +13,7 @@ import { Layer5Section } from './components/sections/Layer5Section'
 import { GlossaryModal } from './components/ui/GlossaryModal'
 import { LAYER_NAV_ITEMS } from './data/layers'
 
-const SECTION_IDS = ['hero', ...LAYER_NAV_ITEMS.map((item) => item.id)]
+const SECTION_IDS = ['hero', 'lab-3d', ...LAYER_NAV_ITEMS.map((item) => item.id)]
 
 export function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
@@ -91,6 +92,7 @@ export function App() {
         onToggleTheme={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
         onOpenDrawer={() => setDrawerOpen(true)}
         onOpenGlossary={handleOpenGlossary}
+        onNavigate={handleNavigate}
         activeSection={activeSection}
       />
 
@@ -107,6 +109,7 @@ export function App() {
           onNavigate={handleNavigate}
           onOpenGlossary={handleOpenGlossary}
         />
+        <Lab3DSection theme={theme} onNavigateLayer={handleNavigate} />
         <Layer0Section onOpenGlossary={handleOpenGlossary} />
         <Layer1Section onOpenGlossary={handleOpenGlossary} />
         <Layer2Section onOpenGlossary={handleOpenGlossary} />

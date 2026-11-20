@@ -13,4 +13,17 @@ export default defineConfig({
    *   หรือทดสอบแบบ Relative Path ให้ใช้ './'
    */
   base: '/silicon-to-software/',
+  build: {
+    chunkSizeWarningLimit: 700,
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: 'three-vendor', test: /node_modules\/three/ },
+            { name: 'motion-vendor', test: /node_modules\/framer-motion/ },
+          ],
+        },
+      },
+    },
+  },
 })

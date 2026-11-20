@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, BookOpen, Home, Layers, X } from 'lucide-react'
+import { ArrowUpRight, BookOpen, Box, Home, Layers, X } from 'lucide-react'
 import { useEffect } from 'react'
 import { LAYER_NAV_ITEMS } from '../../data/layers'
 
@@ -89,6 +89,27 @@ export function NavigationDrawer({
               >
                 <Home className="h-4 w-4 text-[var(--signal-high)]" />
                 <span>หน้าแรก & แผนผังภาพรวม</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate('lab-3d')
+                  onClose()
+                }}
+                className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm transition cursor-pointer ${
+                  activeSection === 'lab-3d'
+                    ? 'bg-[var(--signal-high)]/15 font-semibold text-[var(--signal-high-bright)] border border-[var(--signal-high)]'
+                    : 'bg-[var(--signal-high)]/8 text-[var(--text-primary)] hover:bg-[var(--signal-high)]/15 border border-[var(--signal-high)]/30'
+                }`}
+              >
+                <span className="flex items-center gap-3">
+                  <Box className="h-4 w-4 text-[var(--signal-high-bright)]" />
+                  <span className="font-semibold">ห้องทดลอง 3D Studio (หมุน 360°)</span>
+                </span>
+                <span className="rounded bg-[var(--signal-high)]/20 px-1.5 py-0.5 font-mono-tech text-[10px] font-bold text-[var(--signal-high-bright)]">
+                  NEW
+                </span>
               </button>
 
               <div className="pt-2 pb-1 px-2">
